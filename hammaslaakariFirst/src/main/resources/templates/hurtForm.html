@@ -1,0 +1,19 @@
+package templates;
+
+public class addTooth {
+<h1>Add tooth treatment</h1>
+<div>
+    <form th:object="${tooth}" th:action="@{save}" action="#"
+        method="post"></form>
+    <label for="toothname">Tooth name</label>
+    <input type="radio"
+        th:text="${tooth.toothname} + ' ' + ${tooth.treatedBefore}"
+        th:value="${tooth}">Tooth
+
+    <input type="text" id="fname" th:field="*{tooth.toothname}" />
+    <button type="submit">Submit</button>   
+    </form>
+
+</div>
+
+}
