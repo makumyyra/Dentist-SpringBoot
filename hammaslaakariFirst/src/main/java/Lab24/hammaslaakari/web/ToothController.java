@@ -38,8 +38,13 @@ public class ToothController {
     @GetMapping("/hurtform")
     public String addtoothPage(Model model) {
         model.addAttribute("tooth", new Tooth());
-        model.addAttribute("categories", toothRepository.findAll());
+        model.addAttribute("teeth", toothRepository.findAll());
         return "hurtForm";
+    }
+
+    @GetMapping("/orderconfirmation")
+    public String confirmation(Model model) {
+        return "orderconfirmation";
     }
 
     @PostMapping("/savetooth")
@@ -47,6 +52,12 @@ public class ToothController {
         toothRepository.save(tooth);
         return "treatment";
     }
+
+    // @PostMapping("/treatment")
+    // public String addTreatment(Tooth tooth) {
+    // toothRepository.save(tooth);
+    // return "treatment";
+    // }
 
     /*
      * 

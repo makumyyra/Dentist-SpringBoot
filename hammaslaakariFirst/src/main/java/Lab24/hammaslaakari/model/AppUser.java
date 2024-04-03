@@ -25,6 +25,8 @@ public class AppUser {
     @Column(name = "userrole", nullable = false)
     private String role;
 
+
+    
     public AppUser() {
 
     }

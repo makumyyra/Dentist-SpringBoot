@@ -1,19 +1,33 @@
-package templates;
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Dentist Welcome Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <form action="#" th:object="${tooth}" th:action="@{/orderconfirmation}"
+            method="post">
+            <h1>Which tooth is hurting?</h1>
+            <div>
+                <!--<form th:object="${tooth}" th:action="@{save}" action="#"
+                    method="post">
+                    <input type="radio" value="${tooth.id}" name="answer"
+                        th:text="${tooth.toothname}">
+                    <input type="text" id="fname"
+                        th:field="*{tooth.toothname}" />
+                </form>
+                <button type="submit">Submit</button>
+-->
+                <table>
+                    <p th:each="tooth : ${teeth}">
+                        <input type="radio" value="${tooth.id}" name="answer"
+                            th:text="${tooth.toothname}">
+                    </p>
+                    <button type="submit">Submit</button>
 
-public class addTooth {
-<h1>Add tooth treatment</h1>
-<div>
-    <form th:object="${tooth}" th:action="@{save}" action="#"
-        method="post"></form>
-    <label for="toothname">Tooth name</label>
-    <input type="radio"
-        th:text="${tooth.toothname} + ' ' + ${tooth.treatedBefore}"
-        th:value="${tooth}">Tooth
+                </table>
 
-    <input type="text" id="fname" th:field="*{tooth.toothname}" />
-    <button type="submit">Submit</button>   
-    </form>
-
-</div>
-
-}
+            </div>
+        </form>
+    </body>
+</html>
