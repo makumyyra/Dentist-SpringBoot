@@ -31,7 +31,7 @@ public class Tooth {
     private String toothInfo;
 
     @ManyToOne
-    @JoinColumn(name = "patient")
+    @JoinColumn(name = "patientid")
     private Patient patient;
 
     public Tooth() {

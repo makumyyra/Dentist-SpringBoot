@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Dentist Welcome Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>heipparallaa111111erfwewfefwf</h1>
+
+        <h3>Dental procedure list</h3>
+        <table>
+            <p th:each="tooth : ${dentalmap}">
+                <p>
+                    <label for="toothname">Tooth name:</label>
+                    <th:text="${tooth.toothname}" />
+                </p>
+                <p>
+                    <label for="toothinfo">Procedure description:</label>
+                    <th:text="${tooth.toothinfo}" />
+                </p>
+            </p>
+        </table>
+        <a href="/requestTreatment"
+            class="btn btn-success">Ask for treatment</a>
+
+        <div class="col-md-4" style="padding:10px 0">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Log Out"
+                    class="btn btn-sm btn-danger" />
+            </form>
+        </div>
+
+    </body>
+</html>

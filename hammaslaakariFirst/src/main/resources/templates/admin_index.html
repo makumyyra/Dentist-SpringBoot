@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Dentist Welcome Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Your patients:</h1>
+        <table>
+            <p th:each="patient : ${patients}">
+                <input type="radio" value="${tooth.id}" name="answer"
+                    th:text="${tooth.toothname}">
+            </p>
+
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.patientid}"></td>
+                <td th:text="$patient.patientname}"></td>
+                <td th:text="${patient.dentalmap}"></td>
+                
+            </tr>
+        </table>
+
+
+
+
+            <button type="submit">Submit</button>
+
+        </table>
+    </body>
+</html>

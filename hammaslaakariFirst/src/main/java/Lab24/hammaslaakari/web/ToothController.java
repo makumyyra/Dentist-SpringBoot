@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import Lab24.hammaslaakari.model.AppUserRepository;
+import Lab24.hammaslaakari.model.PatientRepository;
 import Lab24.hammaslaakari.model.Tooth;
 import Lab24.hammaslaakari.model.ToothRepository;
 
@@ -23,10 +24,20 @@ public class ToothController {
     @Autowired
     private AppUserRepository userRepository;
 
-    @GetMapping("/index")
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @GetMapping("/admin_index")
     public String indexPage(Model model) {
-        // model.addAttribute("books", repository.findAll());
-        return "index";
+        model.addAttribute("patients", patientRepository.findAll());
+        return "admin_index";
+    }
+
+    @GetMapping("/user_index")
+    public String userIndexPage(Model model) {
+        model.addAttribute("tooth", new Tooth());
+        model.addAttribute("dentalmap", patientRepository.findAll());
+        return "user_index";
     }
 
     @GetMapping("/toothlist")
@@ -35,16 +46,16 @@ public class ToothController {
         return "toothlist";
     }
 
-    @GetMapping("/hurtform")
-    public String addtoothPage(Model model) {
-        model.addAttribute("tooth", new Tooth());
-        model.addAttribute("teeth", toothRepository.findAll());
-        return "hurtForm";
-    }
-
     @GetMapping("/orderconfirmation")
     public String confirmation(Model model) {
         return "orderconfirmation";
+    }
+
+    @GetMapping("/requestTreatment")
+    public String request(Model model) {
+        model.addAttribute("tooth", new Tooth());
+        model.addAttribute("teeth", toothRepository.findAll());
+        return "requestTreatment";
     }
 
     @PostMapping("/savetooth")
