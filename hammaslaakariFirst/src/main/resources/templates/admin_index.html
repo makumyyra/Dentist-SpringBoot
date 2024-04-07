@@ -6,17 +6,41 @@
     </head>
     <body>
         <h1>Your patients:</h1>
-        <table>
-            <p th:each="patient : ${patients}">
-                <input type="radio" value="${tooth.id}" name="answer"
-                    th:text="${tooth.toothname}">
-            </p>
 
-            <tr th:each="patient : ${patients}">
-                <td th:text="${patient.patientid}"></td>
-                <td th:text="$patient.patientname}"></td>
-                <td th:text="${patient.dentalmap}"></td>
-                
+        
+            <div>
+                <!--<form th:object="${tooth}" th:action="@{save}" action="#"
+                    method="post">
+                    <input type="radio" value="${tooth.id}" name="answer"
+                        th:text="${tooth.toothname}">
+                    <input type="text" id="fname"
+                        th:field="*{tooth.toothname}" />
+                </form>
+                <button type="submit">Submit</button>
+
+                <table>
+                    <p th:each="tooth : ${teeth}">
+                        
+                    </p>
+                    <button type="submit">Submit</button>
+
+                </table>-->
+
+            </div>
+        <table>
+            <tr th:each="treatment : ${treatments}">
+                <td th:text="${treatment.patient.username}"></td>        
+                <!-- <td><a href="@{editPatient/{id}(id=${treatment.patient.id})}">Edit patient info</a></td> 
+                <td th:text="${treatment.tooth.toothname}"></td>            
+                <td><a href="/treatmentEdit" class="btn btn-success">Add treatment info</a></td>--> 
+            
+                <td><a th:href="@{/treatmentEdit(pid=${treatment.patient.patientId}, pname=${treatment.patient.username})}" class="btn btn-success">Add treatment info</a></td>
+                <!--Choose patient:
+                <input type="radio" value="${patient.username}" name="answer"
+                            th:text="${patient.username}">
+               
+                <td><a href="@{/treatment/{id}(id=${patient.id})}"></a></td>
+                -->
             </tr>
         </table>
 

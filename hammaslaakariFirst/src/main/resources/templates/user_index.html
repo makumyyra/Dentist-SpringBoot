@@ -5,20 +5,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
-        <h1>heipparallaa111111erfwewfefwf</h1>
+        <h1>Front Teeth Dental</h1>
+        <!--
+        <h3>Hello <span sec:authentication="name"></span>!</h3>-->
 
         <h3>Dental procedure list</h3>
         <table>
-            <p th:each="tooth : ${dentalmap}">
-                <p>
-                    <label for="toothname">Tooth name:</label>
-                    <th:text="${tooth.toothname}" />
-                </p>
-                <p>
-                    <label for="toothinfo">Procedure description:</label>
-                    <th:text="${tooth.toothinfo}" />
-                </p>
-            </p>
+            <tr th:each="tooth : ${teeth}">
+                <td th:text="${tooth.toothname}"></td>
+
+            </tr>
         </table>
         <a href="/requestTreatment"
             class="btn btn-success">Ask for treatment</a>

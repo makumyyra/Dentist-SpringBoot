@@ -18,31 +18,27 @@ public class Tooth {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    @Column(name = "toothid", nullable = false, updatable = false)
+    private Long toothId;
 
     @Column(name = "toothname", nullable = false, unique = true)
     private String toothname;
-
-    @Column(name = "treatedbefore", nullable = false)
-    private boolean treatedBefore;
-
-    @Column(name = "toothinfo")
-    private String toothInfo;
-
-    @ManyToOne
-    @JoinColumn(name = "patientid")
-    private Patient patient;
 
     public Tooth() {
         super();
     }
 
-    public Tooth(String toothname, boolean treatedBefore, String toothInfo) {
+    public Tooth(String toothname, String toothInfo) {
         super();
         this.toothname = toothname;
-        this.treatedBefore = treatedBefore;
-        this.toothInfo = toothInfo;
+    }
+
+    public Long getToothId() {
+        return toothId;
+    }
+
+    public void setToothId(Long toothId) {
+        this.toothId = toothId;
     }
 
     public String getToothname() {
@@ -51,22 +47,6 @@ public class Tooth {
 
     public void setToothname(String toothname) {
         this.toothname = toothname;
-    }
-
-    public boolean isTreatedBefore() {
-        return treatedBefore;
-    }
-
-    public void setTreatedBefore(boolean treatedBefore) {
-        this.treatedBefore = treatedBefore;
-    }
-
-    public String getToothInfo() {
-        return toothInfo;
-    }
-
-    public void setToothInfo(String toothInfo) {
-        this.toothInfo = toothInfo;
     }
 
 }

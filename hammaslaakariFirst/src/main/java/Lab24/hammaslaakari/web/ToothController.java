@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.yaml.snakeyaml.extensions.compactnotation.PackageCompactConstructor;
 
 import Lab24.hammaslaakari.model.AppUserRepository;
+import Lab24.hammaslaakari.model.Patient;
 import Lab24.hammaslaakari.model.PatientRepository;
 import Lab24.hammaslaakari.model.Tooth;
 import Lab24.hammaslaakari.model.ToothRepository;
+import Lab24.hammaslaakari.model.Treatment;
+import Lab24.hammaslaakari.model.TreatmentRepository;
 
 @Controller
 public class ToothController {
@@ -27,16 +31,19 @@ public class ToothController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @GetMapping("/admin_index")
-    public String indexPage(Model model) {
-        model.addAttribute("patients", patientRepository.findAll());
-        return "admin_index";
-    }
+    @Autowired
+    private TreatmentRepository treatmentRepository;
+
+    // @GetMapping("/admin_index")
+    // public String indexPage(Model model) {
+    // model.addAttribute("patients", patientRepository.findAll());
+    // return "admin_index";
+    // }
 
     @GetMapping("/user_index")
     public String userIndexPage(Model model) {
-        model.addAttribute("tooth", new Tooth());
-        model.addAttribute("dentalmap", patientRepository.findAll());
+        // model.addAttribute("tooth", new Tooth());
+        model.addAttribute("teeth", toothRepository.findAll());
         return "user_index";
     }
 
@@ -58,10 +65,25 @@ public class ToothController {
         return "requestTreatment";
     }
 
-    @PostMapping("/savetooth")
-    public String savetooth(Tooth tooth) {
-        toothRepository.save(tooth);
-        return "treatment";
+    @GetMapping("/admin_index")
+    public String indexPage(Model model) {
+        model.addAttribute("treatments", treatmentRepository.findAll());
+        return "admin_index";
+    }
+
+    @GetMapping("/treatmentEdit")
+    public String editTreatment(@RequestParam("pid") Long pid, @RequestParam("pname") String pname, Model model) {
+        model.addAttribute("treatment", new Treatment());
+        model.addAttribute("tooth", new Tooth());
+        model.addAttribute("patient", new Patient(pid, pname));
+        model.addAttribute("teeth", toothRepository.findAll());
+        return "treatmentEdit";
+    }
+
+    @PostMapping("/savetreatment")
+    public String savetreatment(Treatment t) {
+        treatmentRepository.save(t);
+        return "redirect:/admin_index";
     }
 
     // @PostMapping("/treatment")

@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 import Lab24.hammaslaakari.model.Tooth;
 import Lab24.hammaslaakari.model.ToothRepository;
+import Lab24.hammaslaakari.model.Treatment;
+import Lab24.hammaslaakari.model.TreatmentRepository;
 import Lab24.hammaslaakari.model.AppUser;
 import Lab24.hammaslaakari.model.AppUserRepository;
 import Lab24.hammaslaakari.model.Patient;
@@ -23,26 +25,29 @@ public class HammaslaakariApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ToothRepository toothRepository,
-			AppUserRepository appUserRepository, PatientRepository patientRepository) {
+	public CommandLineRunner demo(
+			ToothRepository toothRepository,
+			AppUserRepository appUserRepository,
+			PatientRepository patientRepository,
+			TreatmentRepository treatmentRepository) {
 
 		return (args) -> {
 			System.out.println("your teeth");
 
-			Tooth ru1 = new Tooth("rightUp1", false, "");
+			Tooth ru1 = new Tooth("rightUp1", "");
 			toothRepository.save(ru1);
-			Tooth ru2 = new Tooth("rightUp2", false, "");
+			Tooth ru2 = new Tooth("rightUp2", "");
 			toothRepository.save(ru2);
-			toothRepository.save(new Tooth("rightUp3", false, ""));
-			toothRepository.save(new Tooth("leftUp1", false, ""));
-			toothRepository.save(new Tooth("leftUp2", false, ""));
-			toothRepository.save(new Tooth("leftUp3", false, ""));
-			toothRepository.save(new Tooth("rightDown1", false, ""));
-			toothRepository.save(new Tooth("rightDown2", false, ""));
-			toothRepository.save(new Tooth("rightDown3", false, ""));
-			toothRepository.save(new Tooth("leftDown1", false, ""));
-			toothRepository.save(new Tooth("leftDown2", false, ""));
-			toothRepository.save(new Tooth("leftDown3", false, ""));
+			toothRepository.save(new Tooth("rightUp3", ""));
+			toothRepository.save(new Tooth("leftUp1", ""));
+			toothRepository.save(new Tooth("leftUp2", ""));
+			toothRepository.save(new Tooth("leftUp3", ""));
+			toothRepository.save(new Tooth("rightDown1", ""));
+			toothRepository.save(new Tooth("rightDown2", ""));
+			toothRepository.save(new Tooth("rightDown3", ""));
+			toothRepository.save(new Tooth("leftDown1", ""));
+			toothRepository.save(new Tooth("leftDown2", ""));
+			toothRepository.save(new Tooth("leftDown3", ""));
 
 			// for (Tooth tooth : toothRepository.findAll()) {
 			// System.out.println(tooth.toString());
@@ -62,9 +67,18 @@ public class HammaslaakariApplication {
 			dentalMap.add(ru1);
 			dentalMap.add(ru2);
 
-			Patient p1 = new Patient("Suvi", dentalMap);
-			System.out.println(p1.toString());
+			Patient p1 = new Patient("Suvi Sammakkosuo");
+			Patient p2 = new Patient("Kalle Taxell");
+			patientRepository.save(p1);
+			patientRepository.save(p2);
 			// patientRepository.save()
+
+			// if patient+tooth is in treatment db, tooth has been treated before
+			// hurting teeth that have been treated before must be removed
+			Treatment treatment1 = new Treatment(ru1, p1, "Treated before, removal necessary");
+			Treatment treatment2 = new Treatment(ru2, p2, "Treated before, removal necessary");
+			treatmentRepository.save(treatment1);
+			treatmentRepository.save(treatment2);
 
 		};
 	}

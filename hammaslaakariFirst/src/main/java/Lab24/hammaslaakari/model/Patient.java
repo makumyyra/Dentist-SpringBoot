@@ -24,28 +24,29 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "patientid") // , nullable = false, updatable = false)
     private Long patientId;
+
     @JoinColumn(name = "patientname", nullable = false)
     private String username;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
-    private List<Tooth> patientDentalMap;
+    // @JsonIgnore
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    // private List<Tooth> patientDentalMap;
 
     public Patient() {
         super();
     }
 
-    public Patient(String username, List<Tooth> patientDentalMap) {
+    public Patient(Long patientId, String username) {
+        this.patientId = patientId;
         this.username = username;
-        this.patientDentalMap = patientDentalMap;
+    }
+
+    public Patient(String username) {
+        this.username = username;
     }
 
     public Long getPatientId() {
         return patientId;
-    }
-
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
     }
 
     public String getUsername() {
@@ -54,14 +55,6 @@ public class Patient {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public List<Tooth> getPatientDentalMap() {
-        return patientDentalMap;
-    }
-
-    public void setPatientDentalMap(List<Tooth> patientDentalMap) {
-        this.patientDentalMap = patientDentalMap;
     }
 
 }
