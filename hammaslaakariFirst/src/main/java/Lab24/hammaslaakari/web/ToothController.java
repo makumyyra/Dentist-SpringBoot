@@ -167,14 +167,9 @@ public class ToothController {
         t.setTooth(tooth);
 
         if (treatmentRepository.existsByToothAndPatient(tooth, p)) {
-            // Handle duplicate treatment
-            // model.addAttribute("error", "Duplicate treatment exists");
-            return "user_index"; // Redirect to an error page or display error message
+            return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla joku error-sivu)
         } else {
-            // Save the treatment
             treatmentRepository.save(t);
-
-            // treatmentRepository.save(t);
             return "redirect:/admin_index";
         }
 
