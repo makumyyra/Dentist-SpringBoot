@@ -115,6 +115,7 @@ public class ToothController {
     }
 
     /*
+     * --------->>>
      * Alkuperäinen @GetMapping("admin_index")
      * Muokattu monta kertaa ohjeiden mukaan ilman toivottua tulosta.
      * Yritetty useaan kertaan luoda listan filtteröintiä (nimi esiintyy vain
@@ -174,7 +175,7 @@ public class ToothController {
         }
 
         // if (toothTreated(chosenTooth, pid)) {
-        // return "user_index"; // Redirect to an error page or display error message
+        // return "user_index";
         // } else {
         // treatmentRepository.save(t);
         // return "redirect:/admin_index";
