@@ -28,17 +28,13 @@ public class Tooth {
         super();
     }
 
-    public Tooth(String toothname, String toothInfo) {
+    public Tooth(String toothname) {
         super();
         this.toothname = toothname;
     }
 
     public Long getToothId() {
         return toothId;
-    }
-
-    public void setToothId(Long toothId) {
-        this.toothId = toothId;
     }
 
     public String getToothname() {

@@ -14,13 +14,6 @@
         <!--
         <h3>Hello <span sec:authentication="name"></span>!</h3>-->
 
-        <h3>Dental procedure list</h3>
-        <table>
-            <tr th:each="tooth : ${teeth}">
-                <td th:text="${tooth.toothname}"></td>
-
-            </tr>
-        </table>
         <a href="/requestTreatment"
             class="btn btn-success">Ask for treatment</a>
 

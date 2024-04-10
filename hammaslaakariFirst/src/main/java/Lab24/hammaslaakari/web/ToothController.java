@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.yaml.snakeyaml.extensions.compactnotation.PackageCompactConstructor;
 
 import Lab24.hammaslaakari.model.AppUserRepository;
+import Lab24.hammaslaakari.model.MessageRepository;
 import Lab24.hammaslaakari.model.Patient;
 import Lab24.hammaslaakari.model.PatientRepository;
 import Lab24.hammaslaakari.model.Tooth;
@@ -43,6 +44,9 @@ public class ToothController {
     @Autowired
     private TreatmentRepository treatmentRepository;
 
+    @Autowired
+    private MessageRepository messageRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(ToothController.class);
 
     // @GetMapping("/admin_index")
@@ -55,6 +59,7 @@ public class ToothController {
     public String userIndexPage(Model model) {
         // model.addAttribute("tooth", new Tooth());
         model.addAttribute("teeth", toothRepository.findAll());
+
         return "user_index";
     }
 
@@ -66,6 +71,7 @@ public class ToothController {
 
     @GetMapping("/orderconfirmation")
     public String confirmation(Model model) {
+        model.addAttribute("messageBody", model);
         return "orderconfirmation";
     }
 
@@ -161,10 +167,10 @@ public class ToothController {
     public String savetreatment(@RequestParam("pid") Long pid, @RequestParam("chosenTooth") Long chosenTooth,
             @ModelAttribute("treatment") Treatment t) {
 
-        logger.info("Incoming request parameters: pid={}, chosenTooth={}", pid, chosenTooth);
         Patient p = patientRepository.findByPatientId(pid);
         t.setPatient(p);
         Tooth tooth = toothRepository.findByToothId(chosenTooth);
+
         t.setTooth(tooth);
 
         if (treatmentRepository.existsByToothAndPatient(tooth, p)) {
@@ -180,6 +186,7 @@ public class ToothController {
         // treatmentRepository.save(t);
         // return "redirect:/admin_index";
     }
+
 }
 
 // @PostMapping("/treatment")

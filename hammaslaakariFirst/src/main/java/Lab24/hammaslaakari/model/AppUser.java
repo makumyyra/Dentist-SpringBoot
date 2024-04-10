@@ -25,8 +25,6 @@ public class AppUser {
     @Column(name = "userrole", nullable = false)
     private String role;
 
-
-    
     public AppUser() {
 
     }
@@ -40,10 +38,6 @@ public class AppUser {
 
     public Long getId() {
         return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
