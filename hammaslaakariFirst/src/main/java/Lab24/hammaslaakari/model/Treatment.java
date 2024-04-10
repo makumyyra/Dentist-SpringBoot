@@ -26,6 +26,10 @@ public class Treatment {
     @JoinColumn(name = "patientid")
     private Patient patient;
 
+    // @ManyToOne
+    // @JoinColumn(name = "patientid")
+    // private Long patientid = patient.getPatientId();
+
     @Column(name = "toothinfo")
     private String toothInfo;
 
@@ -47,12 +51,20 @@ public class Treatment {
         this.tooth = tooth;
     }
 
+    public Long getToothId(Tooth tooth) {
+        return tooth.getToothId();
+    }
+
     public Patient getPatient() {
         return patient;
     }
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Long getPatientId(Patient patient) {
+        return patient.getPatientId();
     }
 
     public String getToothInfo() {

@@ -7,9 +7,16 @@
     <body>
         <h1> <h1>Add treatment info</h1>
 
+            <p>Patient Name: <span th:text="${patient.username}"></span></p>
+
+            <!--(pid=${patient.patientId})-->
             <form action="#" th:object="${treatment}"
                 th:action="@{/savetreatment}"
                 method="post">
+                <input type="hidden" name="pid"
+                    th:value="${patient.patientId}" />
+                <input type="hidden" name="chosenTooth"
+                    th:value="${tooth.toothId}" />
 
                 <label for="toothList">Tooth</label>
                 <select id="toothList" th:field="*{tooth}"
@@ -19,13 +26,22 @@
                         th:text="${tooth.toothname}"></option>
                 </select>
                 <div style="clear: both; display: block; height: 10px;"></div>
+                <input type="hidden" th:field="*{patient}" />
+                <input type="hidden" name="patientId"
+                    th:value="${patient.patientId}" />
+                <input type="hidden" name="chosenTooth"
+                    th:value="${tooth.toothId}" />
+                <!-- <input type="hidden" name="username"
+                    th:value="$patient.username" /> -->
 
-                <p>Add description of treatment
-                    <!-- <span sec:authentication="name"></span>--></p>
-                <p>
-                    <label for="toothInfo">Description:</label>
-                    <input type="text" th:field="*{toothInfo}" />
-                </p>
+                <div>Add description of treatment
+
+                    <!-- <span th:text="${patient.patientId}"></span>-->
+                    <p>
+                        <label for="toothInfo">Description:</label>
+                        <input type="text" th:field="*{toothInfo}" />
+                    </p>
+                </div>
 
                 <input type="submit" value="Save" />
 

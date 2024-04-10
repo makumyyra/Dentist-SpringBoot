@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface PatientRepository extends CrudRepository<Patient, Long> {
     List<Patient> findByUsername(String username);
 
+    Patient findByPatientId(Long patientId);
+
 }

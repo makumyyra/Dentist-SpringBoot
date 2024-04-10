@@ -34,16 +34,18 @@
                 <td th:text="${treatment.tooth.toothname}"></td>            
                 <td><a href="/treatmentEdit" class="btn btn-success">Add treatment info</a></td>--> 
             
-                <td><a th:href="@{/treatmentEdit(pid=${treatment.patient.patientId}, pname=${treatment.patient.username})}" class="btn btn-success">Add treatment info</a></td>
+                <td><a th:href="@{/treatmentEdit(pid=${treatment.patient.patientId})}" class="btn btn-success">Add treatment info</a></td>
                 <!--Choose patient:
                 <input type="radio" value="${patient.username}" name="answer"
                             th:text="${patient.username}">
                
                 <td><a href="@{/treatment/{id}(id=${patient.id})}"></a></td>
                 -->
+                
             </tr>
         </table>
 
+        
 
 
 

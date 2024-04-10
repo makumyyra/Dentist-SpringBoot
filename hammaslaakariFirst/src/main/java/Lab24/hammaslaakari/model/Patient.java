@@ -36,11 +36,6 @@ public class Patient {
         super();
     }
 
-    public Patient(Long patientId, String username) {
-        this.patientId = patientId;
-        this.username = username;
-    }
-
     public Patient(String username) {
         this.username = username;
     }

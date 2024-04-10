@@ -6,4 +6,11 @@ import java.util.Optional;
 
 public interface TreatmentRepository extends CrudRepository<Treatment, Long> {
     Optional<Treatment> findById(Long patientid);
+
+    // boolean existsByToothAndPatient(Long toothid, Long patientid);
+    boolean existsByToothAndPatient(Tooth tooth, Patient patient);
+
+    // boolean existsToothById(Long toothid);
+
+    // boolean existsPatientById(Patient patient);
 }
