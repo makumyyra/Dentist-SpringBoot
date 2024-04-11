@@ -170,6 +170,7 @@ public class ToothController {
             return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla hampaanpoistoon ohjaava sivu)
         } else {
             treatmentRepository.save(t);
+
             return "redirect:/admin_index";
         }
     }
