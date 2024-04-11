@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+@RestController
 public class RESTToothController {
+
     @Autowired
     private ToothRepository toothRepository;
 
@@ -32,9 +34,13 @@ public class RESTToothController {
     private TreatmentRepository treatmentRepository;
 
     @GetMapping("/treatments")
-    public @ResponseBody List<Treatment> treatmentListRest() {
-        return (List<Treatment>) treatmentRepository.findAll();
+    public Iterable<Treatment> getTreatments() {
+        return treatmentRepository.findAll();
     }
+
+    // public @ResponseBody List<Treatment> treatmentListRest() {
+    // return (List<Treatment>) treatmentRepository.findAll();
+    // }
 
     @GetMapping("/treatments{id}")
     public @ResponseBody Optional<Treatment> findTreatmentRest(@PathVariable("id") Long treatmentId) {

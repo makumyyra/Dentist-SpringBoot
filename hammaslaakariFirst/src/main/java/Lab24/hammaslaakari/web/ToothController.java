@@ -1,6 +1,7 @@
 package Lab24.hammaslaakari.web;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,7 @@ import Lab24.hammaslaakari.model.Tooth;
 import Lab24.hammaslaakari.model.ToothRepository;
 import Lab24.hammaslaakari.model.Treatment;
 import Lab24.hammaslaakari.model.TreatmentRepository;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,26 +149,50 @@ public class ToothController {
         model.addAttribute("tooth", new Tooth());
         model.addAttribute("patient", patientRepository.findByPatientId(pid));
         model.addAttribute("teeth", toothRepository.findAll());
+        model.addAttribute("toothinfo", "");
         return "treatmentEdit";
     }
 
     @PostMapping("/savetreatment")
-    public String savetreatment(@RequestParam("pid") Long pid, @RequestParam("chosenTooth") Long chosenTooth,
-            @ModelAttribute("treatment") Treatment t) {
+    public String savetreatment(
+            @RequestParam("pid") Long pid,
+            // @RequestParam("tid") Long tid,
+            @RequestParam("toothInfo") String toothinfo,
+            Treatment t) {
 
-        Patient p = patientRepository.findByPatientId(pid);
-        t.setPatient(p);
-        Tooth tooth = toothRepository.findByToothId(chosenTooth);
+        Patient savePatient = patientRepository.findByPatientId(pid);
+        // Tooth saveTooth = toothRepository.findByToothId(tid);
+        t.setPatient(savePatient);
+        // Treatment newTreatment = new Treatment(saveTooth, savePatient, toothinfo);
+        Tooth saveTooth = t.getTooth();
 
-        t.setTooth(tooth);
-
-        if (treatmentRepository.existsByToothAndPatient(tooth, p)) {
+        if (treatmentRepository.existsByToothAndPatient(saveTooth, savePatient)) {
             return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla hampaanpoistoon ohjaava sivu)
         } else {
             treatmentRepository.save(t);
             return "redirect:/admin_index";
         }
     }
+
+    // @PostMapping("/savetreatment")
+    // public String savetreatment(@RequestParam("pid") Long pid,
+    // @RequestParam("chosenTooth") Long chosenTooth,
+    // @ModelAttribute("treatment") Treatment t) {
+
+    // Patient p = patientRepository.findByPatientId(pid);
+    // t.setPatient(p);
+    // Tooth tooth = toothRepository.findByToothId(chosenTooth);
+
+    // t.setTooth(tooth);
+
+    // if (treatmentRepository.existsByToothAndPatient(tooth, p)) {
+    // return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla
+    // hampaanpoistoon ohjaava sivu)
+    // } else {
+    // treatmentRepository.save(t);
+    // return "redirect:/admin_index";
+    // }
+    // }
 
 }
 

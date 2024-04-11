@@ -15,8 +15,18 @@
                 method="post">
                 <input type="hidden" name="pid"
                     th:value="${patient.patientId}" />
+
+                <input type="hidden" name="tid"
+                    th:value="${tooth.toothId}" />
+                <!--<input type="hidden" name="tid"
+                    th:value="${tooth.toothId}" />
+
+              
+                        <input type="hidden" name="pid"
+                    th:value="${patient.patientId}" />
                 <input type="hidden" name="chosenTooth"
                     th:value="${tooth.toothId}" />
+                    -->
 
                 <label for="toothList">Tooth</label>
                 <select id="toothList" th:field="*{tooth}"
@@ -26,12 +36,13 @@
                         th:text="${tooth.toothname}"></option>
                 </select>
                 <div style="clear: both; display: block; height: 10px;"></div>
-                <input type="hidden" th:field="*{patient}" />
+                <input type="hidden" name="tid"
+                    th:value="${tooth.toothId}" />
+                <!-- <input type="hidden" th:field="*{patient}" />
                 <input type="hidden" name="patientId"
                     th:value="${patient.patientId}" />
-                <input type="hidden" name="chosenTooth"
-                    th:value="${tooth.toothId}" />
-                <!-- <input type="hidden" name="username"
+               
+                <input type="hidden" name="username"
                     th:value="$patient.username" /> -->
 
                 <div>Add description of treatment
@@ -39,7 +50,8 @@
                     <!-- <span th:text="${patient.patientId}"></span>-->
                     <p>
                         <label for="toothInfo">Description:</label>
-                        <input type="text" th:field="*{toothInfo}" />
+                        <input type="text" name="toothInfo"
+                            th:value="*{toothInfo}" th:field="*{toothInfo}" />
                     </p>
                 </div>
 

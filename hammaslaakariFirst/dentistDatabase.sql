@@ -69,3 +69,4 @@ VALUES
 (1, 2, 'Burned'),
 (4, 1, 'Green, growing moss')
 ;
+
