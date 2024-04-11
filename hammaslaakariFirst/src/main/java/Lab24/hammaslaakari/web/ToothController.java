@@ -49,12 +49,6 @@ public class ToothController {
 
     private static final Logger logger = LoggerFactory.getLogger(ToothController.class);
 
-    // @GetMapping("/admin_index")
-    // public String indexPage(Model model) {
-    // model.addAttribute("patients", patientRepository.findAll());
-    // return "admin_index";
-    // }
-
     @GetMapping("/user_index")
     public String userIndexPage(Model model) {
         // model.addAttribute("tooth", new Tooth());
@@ -156,13 +150,6 @@ public class ToothController {
         return "treatmentEdit";
     }
 
-    // public boolean toothTreated(Long toothId, Long patientId) {
-    // boolean treatmentDone = treatmentRepository.existsByToothAndPatient(toothId,
-    // patientId);
-    // return treatmentDone;
-
-    // }
-
     @PostMapping("/savetreatment")
     public String savetreatment(@RequestParam("pid") Long pid, @RequestParam("chosenTooth") Long chosenTooth,
             @ModelAttribute("treatment") Treatment t) {
@@ -174,26 +161,14 @@ public class ToothController {
         t.setTooth(tooth);
 
         if (treatmentRepository.existsByToothAndPatient(tooth, p)) {
-            return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla joku error-sivu)
+            return "user_index"; // ihan vain testin vuoksi (oikeasti pitäisi olla hampaanpoistoon ohjaava sivu)
         } else {
             treatmentRepository.save(t);
             return "redirect:/admin_index";
         }
-
-        // if (toothTreated(chosenTooth, pid)) {
-        // return "user_index";
-        // } else {
-        // treatmentRepository.save(t);
-        // return "redirect:/admin_index";
     }
 
 }
-
-// @PostMapping("/treatment")
-// public String addTreatment(Tooth tooth) {
-// toothRepository.save(tooth);
-// return "treatment";
-// }
 
 /*
  * 

@@ -38,7 +38,7 @@ VALUES
 ;
 
 CREATE TABLE patient 
-(id BIGSERIAL PRIMARY KEY,
+(patientid BIGSERIAL PRIMARY KEY,
 patientname VARCHAR(100) NOT NULL
 );
 

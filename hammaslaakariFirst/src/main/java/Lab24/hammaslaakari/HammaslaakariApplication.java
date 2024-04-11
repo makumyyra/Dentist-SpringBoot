@@ -50,10 +50,6 @@ public class HammaslaakariApplication {
 	 * toothRepository.save(new Tooth("leftDown2"));
 	 * toothRepository.save(new Tooth("leftDown3"));
 	 * 
-	 * // for (Tooth tooth : toothRepository.findAll()) {
-	 * // System.out.println(tooth.toString());
-	 * // }
-	 * 
 	 * // Create users: admin/admin user/user
 	 * 
 	 * AppUser user1 = new AppUser("user",

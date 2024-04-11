@@ -15,6 +15,8 @@ import Lab24.hammaslaakari.model.TreatmentRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,6 +51,11 @@ public class RESTToothController {
     public @ResponseBody Optional<Patient> findPatientRest(@PathVariable("id") Long patientId) {
 
         return patientRepository.findById(patientId);
+    }
+
+    @PostMapping("/treatment")
+    Treatment newTreatment(@RequestBody Treatment newTreatment) {
+        return treatmentRepository.save(newTreatment);
     }
 
 }

@@ -21,16 +21,16 @@ import jakarta.persistence.Table;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patientid") // , nullable = false, updatable = false)
     private Long patientId;
 
-    @JoinColumn(name = "patientname", nullable = false)
+    @Column(name = "patientname", nullable = false)
     private String username;
 
-    // @JsonIgnore
-    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
-    // private List<Tooth> patientDentalMap;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    private List<Treatment> patientTreatments;
 
     public Patient() {
         super();
@@ -38,6 +38,14 @@ public class Patient {
 
     public Patient(String username) {
         this.username = username;
+    }
+
+    public List<Treatment> getTreatments() {
+        return patientTreatments;
+    }
+
+    public void setTreatments(List<Treatment> patientTreatments) {
+        this.patientTreatments = patientTreatments;
     }
 
     public Long getPatientId() {

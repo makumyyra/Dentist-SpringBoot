@@ -8,11 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "appuser")
+@Table(name = "app_user")
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
@@ -56,12 +56,12 @@ public class AppUser {
         this.passwordHash = passwordHash;
     }
 
-    public String getUserRole() {
+    public String getRole() {
         return this.role;
     }
 
-    public void setUserRole(String userRole) {
-        this.role = role;
+    public void setRole(String userRole) {
+        this.role = userRole;
     }
 
 }
