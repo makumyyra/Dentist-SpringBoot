@@ -38,10 +38,6 @@ public class RESTToothController {
         return treatmentRepository.findAll();
     }
 
-    // public @ResponseBody List<Treatment> treatmentListRest() {
-    // return (List<Treatment>) treatmentRepository.findAll();
-    // }
-
     @GetMapping("/treatments{id}")
     public @ResponseBody Optional<Treatment> findTreatmentRest(@PathVariable("id") Long treatmentId) {
 

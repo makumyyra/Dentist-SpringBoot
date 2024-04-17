@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Booklist</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+            th:href="@{css/bootstrap.min.css}" />
+
+    </head>
+    <body>
+        <h1>Edit Patient</h1>
+        <div>
+            <form th:object="${patient}" th:action="@{/savepatient}"
+                method="post">
+                <input type="hidden" id="id" th:field="*{patientId}" />
+                <div>
+                    <label>Patient name: </label>
+                    <input type="text" th:field="*{username}" />
+                </div>
+
+                <input type="submit" value="Save" />
+
+            </form>
+        </div>
+
+    </body>
+</html>

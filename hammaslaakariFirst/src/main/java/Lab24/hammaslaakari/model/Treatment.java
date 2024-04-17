@@ -1,5 +1,8 @@
 package Lab24.hammaslaakari.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,65 +18,70 @@ import jakarta.persistence.Table;
 public class Treatment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "treatmentid")
-    private Long treatmentId;
-
-    @ManyToOne
-    @JoinColumn(name = "toothid")
-    private Tooth tooth;
+    private Long treatmentid;
 
     @ManyToOne
     @JoinColumn(name = "patientid")
     private Patient patient;
 
-    // @ManyToOne
-    // @JoinColumn(name = "patientid")
-    // private Long patientid = patient.getPatientId();
+    // @Column(name = "treatmentday", columnDefinition = "DATE")
+    // private LocalDate treatmentDay;
 
-    @Column(name = "toothinfo")
-    private String toothInfo;
+    // @ManyToOne
+    // @JoinColumn(name = "teeth")
+    // private List<Tooth> teeth;
+
+    // @Column(name = "toothinfo")
+    // private String toothInfo;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "treatment")
+    private List<ToothTreatment> toothTreatments;
 
     public Treatment() {
+    }
+
+    public Treatment(Patient patient, List<ToothTreatment> toothTreatments) {
         super();
-    }
-
-    public Treatment(Tooth tooth, Patient patient, String toothInfo) {
-        this.tooth = tooth;
         this.patient = patient;
-        this.toothInfo = toothInfo;
+        this.toothTreatments = toothTreatments;
     }
 
-    public Tooth getTooth() {
-        return tooth;
+    public Long getTreatmentId() {
+        return treatmentid;
     }
 
-    public void setTooth(Tooth tooth) {
-        this.tooth = tooth;
-    }
+    // public Long getToothId(Tooth tooth) {
+    // return tooth.getToothId();
+    // }
 
-    public Long getToothId(Tooth tooth) {
-        return tooth.getToothId();
-    }
+    // public LocalDate getTreatmentDay() {
+    // return treatmentDay;
+    // }
 
-    public Patient getPatient() {
-        return patient;
-    }
+    // public void setTreatmentDay(LocalDate treatmentDay) {
+    // this.treatmentDay = treatmentDay;
+    // }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
+    // public void setPatientId(Long patientid) {
+    // this.patientid = patientid;
+    // }
 
-    public Long getPatientId(Patient patient) {
+    public Long getPatientId() {
         return patient.getPatientId();
     }
 
-    public String getToothInfo() {
-        return toothInfo;
+    public List<ToothTreatment> getToothTreatments() {
+        return this.toothTreatments;
     }
 
-    public void setToothInfo(String toothInfo) {
-        this.toothInfo = toothInfo;
-    }
+    // public String getToothInfo() {
+    // return toothInfo;
+    // }
+
+    // public void setToothInfo(String toothInfo) {
+    // this.toothInfo = toothInfo;
+    // }
 
 }

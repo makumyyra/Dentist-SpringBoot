@@ -9,44 +9,37 @@
     <body>
         <h1>Your patients:</h1>
 
-        
-            <div>
-                <!--<form th:object="${tooth}" th:action="@{save}" action="#"
-                    method="post">
-                    <input type="radio" value="${tooth.id}" name="answer"
-                        th:text="${tooth.toothname}">
-                    <input type="text" id="fname"
-                        th:field="*{tooth.toothname}" />
-                </form>
-                <button type="submit">Submit</button>
 
-                <table>
-                    <p th:each="tooth : ${teeth}">
-                        
-                    </p>
-                    <button type="submit">Submit</button>
-
-                </table>-->
-
-            </div>
         <table>
-            <tr th:each="treatment : ${treatments}">
-                <td th:text="${treatment.patient.username}"></td>        
+            <tr>
+                <th>Patient name</th>
+                <th>Check treatment</th>
+                <th>Edit patient info</th>
+                <th>Delete patient</th>
+            </tr>
+            <tr th:each="patientname : ${patientnames}">
+                <td th:text="${patientname}"></td>        
                 <!-- <td><a href="@{editPatient/{id}(id=${treatment.patient.id})}">Edit patient info</a></td> 
                 <td th:text="${treatment.tooth.toothname}"></td>            
                 <td><a href="/treatmentEdit" class="btn btn-success">Add treatment info</a></td>--> 
             
-                <td><a th:href="@{/treatmentEdit(pid=${treatment.patient.patientId})}" class="btn btn-success">Add treatment info</a></td>
+                <td><a th:href="@{/seePatientDetails}" class="btn btn-success">See info</a></td>
                 <!--Choose patient:
                 <input type="radio" value="${patient.username}" name="answer"
                             th:text="${patient.username}">
                
                 <td><a href="@{/treatment/{id}(id=${patient.id})}"></a></td>
                 -->
-                
+
+                <td sec:authorize="hasAuthority('ADMIN')"><a
+                    th:href="@{/editPatient/{id}(id=${patientId})}">Edit</a></td>
+            <td
+                sec:authorize="hasAuthority('ADMIN')"><a
+                    th:href="@{/delete/{id}(id=${patientId})}"
+                    class="btn btn-danger">Delete</a></td>
             </tr>
         </table>
-
+<br>
         <!--Tähän kuuluisi oikeasti laittaa esim "/checkmessages" tms.-->
         <a href="/orderconfirmation" 
         class="btn btn-success">Check treatment requests</a>

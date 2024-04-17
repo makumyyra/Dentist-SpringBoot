@@ -3,26 +3,28 @@
     <head>
         <title>Dentist Welcome Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+            th:href="@{css/bootstrap.min.css}" />
     </head>
     <body>
-        <form action="#" th:object="${tooth}" th:action="@{/orderconfirmation}"
+        <form action="#" th:object="${message}"
+            th:action="@{/orderconfirmation}"
             method="post">
             <h1>Which tooth is hurting?</h1>
             <div>
-                <!--<form th:object="${tooth}" th:action="@{save}" action="#"
-                    method="post">
-                    <input type="radio" value="${tooth.id}" name="answer"
-                        th:text="${tooth.toothname}">
-                    <input type="text" id="fname"
-                        th:field="*{tooth.toothname}" />
-                </form>
-                <button type="submit">Submit</button>
--->
                 <table>
-                    <p th:each="tooth : ${teeth}">
-                        <input type="radio" value="${tooth.id}" name="answer"
-                            th:text="${tooth.toothname}">
-                    </p>
+                    <select id="toothList" th:field="*{tooth}"
+                        class="form-control">
+                        <option th:each="tooth: ${teeth}"
+                            th:value="${tooth.toothId}"
+                            th:text="${tooth.toothname}"></option>
+                    </select>
+                    <label for="messageBody">Add a description:</label>
+                    <br>
+                    <textarea id="messageBody" name="messageBody"
+                        th:field="*{messageBody}"
+                        rows="4" cols="30"></textarea>
+                    <br>
                     <button type="submit">Submit</button>
 
                 </table>
@@ -30,4 +32,52 @@
             </div>
         </form>
     </body>
+
+    <!--
+        Alkuperäisen lomakkeen korjailussa käytetty apuna ChatGPT:tä.
+        Ohjeet 11.4.24 klo 22:08:
+
+        "Your form looks mostly correct, but there are a few adjustments needed to ensure that it captures both the tooth selection and the message body:
+        Ensure that the form is bound to the correct object. Since you want to capture both the tooth selection and the message body, you should bind the form to an object that contains both properties. It seems like you're trying to bind it to tooth, but you should create a new object that holds both toothId and messageBody.
+        Adjust the textarea and select input names to match the properties of the object you're binding to. 
+        
+        [--]
+        
+        In this modified form:
+
+        The form is bound to the message object using th:object="${message}".
+        The select input for choosing the tooth is named "toothId" and is bound to the toothId property of the message object.
+        The textarea for the message body is named "messageBody" and is bound to the messageBody property of the message object.""
+
+
+        Alkuperäinen (itse tehty) lomake: 
+        <body>
+        <form action="#" th:object="${tooth}" th:action="@{/orderconfirmation}"
+            method="post">
+            <h1>Which tooth is hurting?</h1>
+            <div>
+                <table>
+                    <select id="toothList" th:field="*{toothId}"
+                        class="form-control">
+                        <option th:each="tooth: ${teeth}"
+                            th:value="${tooth.toothId}"
+                            th:text="${tooth.toothname}"></option>
+                    </select>
+                    <label for="messageBody">Add a description:</label>
+                    <br>
+                    <textarea name="messageBody" th:value="${messagebody}"
+                        th:field="*{messagebody}"
+                        rows="4" cols="30"></textarea>
+                    <br>
+                    <button type="submit">Submit</button>
+
+                </table>
+
+            </div>
+        </form>
+    </body>
+
+
+
+    -->
 </html>

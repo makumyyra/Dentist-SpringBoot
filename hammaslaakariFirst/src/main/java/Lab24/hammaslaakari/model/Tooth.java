@@ -1,19 +1,13 @@
 package Lab24.hammaslaakari.model;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Locale.Category;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,17 +15,26 @@ import jakarta.persistence.Table;
 @Table(name = "tooth")
 public class Tooth {
 
+    Treatment t;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "toothid", nullable = false, updatable = false)
-    private Long toothId;
+    private Long toothid;
 
     @Column(name = "toothname", nullable = false, unique = true)
     private String toothname;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tooth")
-    private List<Treatment> toothTreatments;
+    // @OneToMany
+    // @JoinColumn(name = "treatmentid")
+    // private Long patientid = t.getTreatmentId();
+
+    // @JsonIgnore
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "tooth")
+    // private List<Treatment> treatments;
+
+    @OneToMany(mappedBy = "tooth", cascade = CascadeType.ALL)
+    private List<ToothTreatment> toothTreatments;
 
     public Tooth() {
         super();
@@ -43,7 +46,7 @@ public class Tooth {
     }
 
     public Long getToothId() {
-        return toothId;
+        return toothid;
     }
 
     public String getToothname() {
@@ -54,12 +57,12 @@ public class Tooth {
         this.toothname = toothname;
     }
 
-    public List<Treatment> getToothTreatments() {
-        return toothTreatments;
-    }
+    // public List<Treatment> getToothTreatments() {
+    // return treatments;
+    // }
 
-    public void setToothTreatments(List<Treatment> toothTreatments) {
-        this.toothTreatments = toothTreatments;
-    }
+    // public void setToothTreatments(List<Treatment> treatments) {
+    // this.treatments = treatments;
+    // }
 
 }

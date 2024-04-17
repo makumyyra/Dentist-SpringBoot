@@ -14,7 +14,22 @@
     <body>
         <h1>Front Teeth Dental</h1>
         <!--
-        <h3>Hello <span sec:authentication="name"></span>!</h3>-->
+        <h3>Hello <span sec:authentication="name"></span>!</h3>
+
+        Your treated teeth are:
+
+        <table>
+            <tr th:each="patientTooth : ${patientDentalMap}">
+
+                <td th:text="${patientTooth.tooth.toothId}"></td>
+                <td th:text="${patientTooth.tooth.toothinfo}"></td>
+
+            </table>-->
+
+        <table>
+            <h3 th:text="${patientDentalMap}" />
+
+        </table>
 
         <a href="/requestTreatment"
             class="btn btn-success">Ask for treatment</a>

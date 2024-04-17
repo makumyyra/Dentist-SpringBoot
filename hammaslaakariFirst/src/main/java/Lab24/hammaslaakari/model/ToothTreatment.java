@@ -10,31 +10,26 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "messagedentist")
-public class Message {
+@Table(name = "tooth_treatment")
+public class ToothTreatment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "messageid", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "toothid")
     private Tooth tooth;
 
-    @Column(name = "messagebody")
-    private String messageBody;
+    @ManyToOne
+    @JoinColumn(name = "treatmentid")
+    private Treatment treatment;
+
+    @Column(name = "treatmentinfo")
+    private String treatmentinfo;
 
     public Long getId() {
         return id;
-    }
-
-    public String getMessageBody() {
-        return messageBody;
-    }
-
-    public void setMessageBody(String messageBody) {
-        this.messageBody = messageBody;
     }
 
     public Tooth getTooth() {
@@ -43,6 +38,22 @@ public class Message {
 
     public void setTooth(Tooth tooth) {
         this.tooth = tooth;
+    }
+
+    public Treatment getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(Treatment treatment) {
+        this.treatment = treatment;
+    }
+
+    public String getTreatmentInfo() {
+        return treatmentinfo;
+    }
+
+    public void setTreatmentInfo(String treatmentInfo) {
+        this.treatmentinfo = treatmentInfo;
     }
 
 }

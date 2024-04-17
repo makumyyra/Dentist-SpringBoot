@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,12 +22,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import Lab24.hammaslaakari.web.UserDetailServiceImpl;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+        private final AuthenticationHandler authenticationHandler;
+
+        @Lazy
+        @Autowired
+        public WebSecurityConfig(AuthenticationHandler authenticationHandler) {
+                this.authenticationHandler = authenticationHandler;
+        }
 
         @Autowired
         private UserDetailServiceImpl userDetailsService;
@@ -38,7 +50,8 @@ public class WebSecurityConfig {
                                                 .requestMatchers(antMatcher("/css/**")).permitAll()
                                                 .anyRequest().authenticated())
                                 .formLogin(formlogin -> formlogin
-                                                .defaultSuccessUrl("/user_index", true).permitAll())
+                                                .successHandler(authenticationHandler)
+                                                .permitAll())
                                 .logout(logout -> logout
                                                 .permitAll());
 
@@ -68,6 +81,11 @@ public class WebSecurityConfig {
                 users.add(user2);
 
                 return new InMemoryUserDetailsManager(users);
+        }
+
+        @Bean
+        public AuthenticationHandler authenticationHandler() {
+                return new AuthenticationHandler();
         }
 
 }
