@@ -18,14 +18,14 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patientid") // , nullable = false, updatable = false)
-    private Long patientid;
+    private Long patientId;
 
     @Column(name = "patientname", nullable = false)
     private String username;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
-    private List<Treatment> treatments;
+    // @JsonIgnore
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    // private List<Treatment> treatments;
 
     public Patient() {
         super();
@@ -35,16 +35,16 @@ public class Patient {
         this.username = username;
     }
 
-    public List<Treatment> getTreatments() {
-        return treatments;
-    }
+    // public List<Treatment> getTreatments() {
+    // return treatments;
+    // }
 
-    public void setTreatments(List<Treatment> treatments) {
-        this.treatments = treatments;
-    }
+    // public void setTreatments(List<Treatment> treatments) {
+    // this.treatments = treatments;
+    // }
 
     public Long getPatientId() {
-        return patientid;
+        return patientId;
     }
 
     public String getUsername() {

@@ -19,12 +19,19 @@ public class Treatment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "treatmentid")
+    @Column(name = "treatmentId")
     private Long treatmentid;
 
-    @ManyToOne
+    // takaisin:
+    // @ManyToOne
+    // @JoinColumn(name = "patientid")
+    // private Patient patient;
+
+    // @Column(name = "patientid")
+    // private Long patientId;
+
     @JoinColumn(name = "patientid")
-    private Patient patient;
+    private Long patientId;
 
     // @Column(name = "treatmentday", columnDefinition = "DATE")
     // private LocalDate treatmentDay;
@@ -42,9 +49,9 @@ public class Treatment {
     public Treatment() {
     }
 
-    public Treatment(Patient patient, List<ToothTreatment> toothTreatments) {
+    public Treatment(Long patientId, List<ToothTreatment> toothTreatments) {
         super();
-        this.patient = patient;
+        // this.patient = patient;
         this.toothTreatments = toothTreatments;
     }
 
@@ -68,13 +75,14 @@ public class Treatment {
     // this.patientid = patientid;
     // }
 
-    public Long getPatientId() {
-        return patient.getPatientId();
-    }
+    // takaisin:
+    // public Long getPatientId() {
+    // return patient.getPatientId();
+    // }
 
-    public List<ToothTreatment> getToothTreatments() {
-        return this.toothTreatments;
-    }
+    // public List<ToothTreatment> getToothTreatments() {
+    // return this.toothTreatments;
+    // }
 
     // public String getToothInfo() {
     // return toothInfo;

@@ -20,7 +20,7 @@ public class Tooth {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "toothid", nullable = false, updatable = false)
-    private Long toothid;
+    private Long toothId;
 
     @Column(name = "toothname", nullable = false, unique = true)
     private String toothname;
@@ -46,7 +46,7 @@ public class Tooth {
     }
 
     public Long getToothId() {
-        return toothid;
+        return toothId;
     }
 
     public String getToothname() {
